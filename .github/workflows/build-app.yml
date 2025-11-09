@@ -1,0 +1,32 @@
+name: Build app.py from parts
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'app_parts_split/**'
+      - 'build_app.py'
+      - '.github/workflows/build-app.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build app.py
+        run: |
+          python build_app.py
+          echo "Done."
+
+      - name: Commit app.py if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'ci: rebuild app.py from parts'
+          file_pattern: app.py
