@@ -23,7 +23,6 @@ jobs:
       - name: Build app.py
         run: |
           python build_app.py
-          echo "Done."
 
       - name: Commit app.py if changed
         uses: stefanzweifel/git-auto-commit-action@v5
