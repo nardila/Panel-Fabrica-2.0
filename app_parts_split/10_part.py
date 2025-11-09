@@ -1,0 +1,1 @@
+ventas = ventas.assign(MARGEN_BRUTO=ventas["MARGEN"] - ventas["COSTO_MO_RECUP"])
