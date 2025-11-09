@@ -8,12 +8,17 @@ on:
       - 'build_app.py'
       - '.github/workflows/build-app.yml'
 
+permissions:
+  contents: write   # ⬅️ Permite commitear app.py al repo
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -22,6 +27,8 @@ jobs:
 
       - name: Build app.py
         run: |
+          python --version
+          ls -la
           python build_app.py
 
       - name: Commit app.py if changed
